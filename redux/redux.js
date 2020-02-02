@@ -6,11 +6,6 @@ const addProject = (task) => ({
   task,
 });
 
-// const addProjectDataById = (task) => ({
-//   type: "addProjectDataById",
-//   task,
-// });
-
 const patchProjectDataById = (pjId, pjInfo) => ({
   type: "patchProjectDataById",
   pjId,
@@ -29,11 +24,6 @@ const reducer = (state = [], action) => {
     case "addProject": {
       return [...state, action.task];
     }
-    // case "getProjectDataById": {
-    //   return state.filter((projectInfo) => {
-    //     return projectInfo.id === action.task;
-    //   });
-    // }
     case "patchProjectDataById": {
       for (let i = 0; i < state.length; i++) {
         if (state[i].name === action.pjId) {
@@ -58,7 +48,6 @@ const store = redux.createStore(reducer, initialState);
 module.exports = {
   store,
   addProject,
-
   patchProjectDataById,
   deleteProjectDataById,
 };

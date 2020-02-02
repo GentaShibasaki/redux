@@ -130,17 +130,17 @@ const testBuilds = async () => {
   await req(projBuilds(2), { method: "POST" });
   const pendingBuildTests = await getJson(projBuilds(2));
   pendingBuildTests.builds.length.should.equal(1);
-  pendingBuildTests.builds[0].state.should.equal("Pending");
+  pendingBuildTests.builds[0].status.should.equal("Pending");
 
   await Promise.delay(4000);
   console.info("GET /api/projects/:projectId/builds/:buildNumber");
   const runningBuild = await getJson(buildUrl(2, 0));
-  runningBuild.state.should.equal("Running");
+  runningBuild.status.should.equal("Running");
 
   await Promise.delay(4000);
   const finishedBuild = await getJson(buildUrl(2, 0));
-  const { state } = finishedBuild;
-  assert(["Success", "Failed"].includes(state));
+  const { status } = finishedBuild;
+  assert(["Success", "Failed"].includes(status));
   finishedBuild.output.should.not.be.empty;
 
   await Promise.all([
